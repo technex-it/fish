@@ -1,6 +1,5 @@
 import { User, Product, Order, LeaveRequest } from '../types';
 
-// Mock Users Data
 export const mockUsers: User[] = [
   {
     id: '1',
@@ -25,65 +24,69 @@ export const mockUsers: User[] = [
   }
 ];
 
-// Mock Products Data
 export const mockProducts: Product[] = [
   {
     id: '1',
     name: 'Fresh Atlantic Salmon',
     description: 'Premium salmon fillets, perfect for grilling or baking.',
-    price: 24.99,
+    price: 1499.99,
     image: 'https://images.pexels.com/photos/3296434/pexels-photo-3296434.jpeg?auto=compress&cs=tinysrgb&w=500',
     category: 'fish',
-    inStock: true
+    inStock: true,
+    weightOptions: ['500g', '1kg', '2kg']
   },
   {
     id: '2',
     name: 'Jumbo Shrimp',
     description: 'Large, succulent shrimp, ready to cook and serve.',
-    price: 18.99,
+    price: 899.99,
     image: 'https://images.pexels.com/photos/566345/pexels-photo-566345.jpeg?auto=compress&cs=tinysrgb&w=500',
     category: 'shellfish',
-    inStock: true
+    inStock: true,
+    weightOptions: ['250g', '500g', '1kg']
   },
   {
     id: '3',
     name: 'Pacific Cod',
     description: 'Wild-caught cod fillets, mild flavor and flaky texture.',
-    price: 15.99,
+    price: 799.99,
     image: 'https://images.pexels.com/photos/2871757/pexels-photo-2871757.jpeg?auto=compress&cs=tinysrgb&w=500',
     category: 'fish',
-    inStock: true
+    inStock: true,
+    weightOptions: ['500g', '1kg']
   },
   {
     id: '4',
     name: 'Live Maine Lobster',
     description: 'Fresh live lobsters from the cold waters of Maine.',
-    price: 34.99,
+    price: 2499.99,
     image: 'https://images.pexels.com/photos/1578921/pexels-photo-1578921.jpeg?auto=compress&cs=tinysrgb&w=500',
     category: 'shellfish',
-    inStock: true
+    inStock: true,
+    weightOptions: ['500g', '750g', '1kg']
   },
   {
     id: '5',
     name: 'Fresh Oysters',
     description: 'Dozen fresh oysters, harvested daily.',
-    price: 21.99,
+    price: 1299.99,
     image: 'https://images.pexels.com/photos/1148086/pexels-photo-1148086.jpeg?auto=compress&cs=tinysrgb&w=500',
     category: 'shellfish',
-    inStock: true
+    inStock: true,
+    weightOptions: ['6pcs', '12pcs']
   },
   {
     id: '6',
     name: 'Ahi Tuna Steaks',
     description: 'Sushi-grade tuna steaks, perfect for grilling or searing.',
-    price: 29.99,
+    price: 1899.99,
     image: 'https://images.pexels.com/photos/566345/pexels-photo-566345.jpeg?auto=compress&cs=tinysrgb&w=500',
     category: 'fish',
-    inStock: false
+    inStock: false,
+    weightOptions: ['250g', '500g']
   }
 ];
 
-// Mock Orders Data
 export const mockOrders: Order[] = [
   {
     id: '1',
@@ -125,7 +128,6 @@ export const mockOrders: Order[] = [
   }
 ];
 
-// Mock Leave Requests Data
 export const mockLeaveRequests: LeaveRequest[] = [
   {
     id: '1',
