@@ -1,10 +1,3 @@
-import React from 'react';
-import { useCart } from '../../contexts/CartContext';
-import { Product } from '../../types';
-import { Button } from '../ui/Button';
-import { Card, CardContent, CardFooter } from '../ui/Card';
-import { ShoppingCart } from 'lucide-react';
-
 import React, { useState } from 'react';
 import { useCart } from '../../contexts/CartContext';
 import { Product } from '../../types';
