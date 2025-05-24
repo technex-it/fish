@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { Input } from '../ui/Input';
 import { Button } from '../ui/Button';
@@ -10,8 +10,9 @@ export const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { login, user: loginUser } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -23,16 +24,13 @@ export const LoginForm: React.FC = () => {
       const loggedInUser = await login(email, password);
       
       if (loggedInUser) {
-        // Redirect based on user role
-        if (loggedInUser.role === 'employee') {
-          navigate('/employee/dashboard');
-        } else if (loggedInUser.role === 'admin') {
-          navigate('/admin/dashboard');
-        } else if (loggedInUser.role === 'customer') {
-          navigate('/customer/dashboard');
-        } else {
-          navigate('/dashboard');
-        }
+        const dashboardPaths = {
+          customer: '/customer/dashboard',
+          employee: '/employee/dashboard',
+          admin: '/admin/dashboard'
+        };
+        
+        navigate(dashboardPaths[loggedInUser.role] || '/dashboard');
       } else {
         setError('Invalid email or password');
       }
@@ -44,10 +42,16 @@ export const LoginForm: React.FC = () => {
     }
   };
 
+  // Determine which login type to show based on URL
+  const loginType = new URLSearchParams(location.search).get('role') || 'customer';
+  const isEmployeeLogin = loginType === 'employee';
+
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <h2 className="text-2xl font-bold text-center text-gray-800">Login</h2>
+        <h2 className="text-2xl font-bold text-center text-gray-800">
+          {isEmployeeLogin ? 'Employee Login' : 'Customer Login'}
+        </h2>
       </CardHeader>
       
       <CardContent>
@@ -96,13 +100,18 @@ export const LoginForm: React.FC = () => {
       
       <CardFooter className="text-center text-gray-600 text-sm">
         <div className="mb-2">
-          <p>Demo Users:</p>
+          <p>Demo Accounts:</p>
         </div>
         <div className="grid grid-cols-1 gap-2 text-left">
           <div className="text-xs">
-            <p><strong>Customer:</strong> customer@example.com</p>
-            <p><strong>Employee:</strong> employee@example.com</p>
-            <p><strong>Admin:</strong> admin@example.com</p>
+            {isEmployeeLogin ? (
+              <>
+                <p><strong>Employee:</strong> employee@example.com</p>
+                <p><strong>Admin:</strong> admin@example.com</p>
+              </>
+            ) : (
+              <p><strong>Customer:</strong> customer@example.com</p>
+            )}
           </div>
         </div>
         <div className="mt-2">
